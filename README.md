@@ -2,11 +2,11 @@
 
 pseudocode:
 
-*create a array board 3x3 []
+*create a array board 3x3 [x]
 
-*create 2 players []
+*create 2 players [x]
 
-*create 2 option to play 'X' and 'O' []
+*create 2 option to play 'X' and 'O' [x]
 
 *check when the game is over []
     -Player1 win (3 'X' in a row)
