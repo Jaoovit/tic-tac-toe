@@ -10,7 +10,7 @@ pseudocode:
 
 *check when the game is over []
     -Player1 win (3 'X' in a row)
-    -Payer2 win (3 'Y' in a row)
+    -Payer2 win (3 'O' in a row)
     -Tie
 
 *create a gameboard []
