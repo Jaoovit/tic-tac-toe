@@ -32,8 +32,4 @@ const winningCombinations = [
     [6, 4, 2]
 ]
 
-function gameOver() {
-               
-};
-
 

@@ -1,0 +1,49 @@
+body {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    gap: 35px;
+ }
+
+.cell {
+    width: 120px;
+    height: 120px;
+    border: solid 2px gray;
+    opacity: 60%;
+    font-size: 85px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.gameBoard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    width: 350px;
+    height: 350px;
+    margin: auto;
+    gap: 1px;
+    text-align: center;
+}
+
+.players {
+    display: flex;
+    gap: 250px;
+    margin-top: 20px;
+}
+
+.restartBtn {
+    text-decoration: none;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    border-radius: 5px;
+    background-color: white;
+    border: solid 2px gray;
+    font-size: 15px;
+    padding: 15px;
+    opacity: 60%;
+    cursor: pointer;
+}
+
