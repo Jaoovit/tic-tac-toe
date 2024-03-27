@@ -32,10 +32,11 @@ function createPlayer (name, mark) {
     return{playerName, playerMark}
 };
 
-let playerOne = createPlayer('', 'x');
-let playerTwo = createPlayer('', 'o');
+let playerOne = createPlayer('João', 'x');
+let playerTwo = createPlayer('Maria', 'o');
 
-let currentPlayer = playerOne.playerMark;
+let currentPlayerMark = playerOne.playerMark;
+let currentPlayerName = playerOne.playerName;
 let running = false;
 
 initializeGame();
@@ -43,7 +44,7 @@ initializeGame();
 function initializeGame() {
     cells.forEach(cell => cell.addEventListener('click', cellClicked))
     restartBtn.addEventListener('click', restartGame)
-    statusText.textContent = `${currentPlayer}'s turn`
+    statusText.textContent = `${currentPlayerName}'s turn`
     running = true;
 };
 
@@ -55,6 +56,7 @@ function cellClicked() {
     }
 
     updateCell(this, cellIndex);
+    changePlayer();
     checkWinner()
 }
 
@@ -63,9 +65,16 @@ function restartGame() {
 }
 
 function updateCell(cell, index) {
-    Gameboard.board[index] = currentPlayer;
-    cell.textContent = currentPlayer;
+    Gameboard.board[index] = currentPlayerMark;
+    cell.textContent = currentPlayerMark;
     console.log(Gameboard.board)
+}
+
+function changePlayer() {
+    currentPlayerMark = (currentPlayerMark == playerOne.playerMark) ? playerTwo.playerMark : playerOne.playerMark;
+    currentPlayerName = (currentPlayerName == playerOne.playerName) ? playerTwo.playerName : playerOne.playerName;
+    statusText.textContent = `${currentPlayerName}'s turn`;
+
 }
 
 function checkWinner() {
