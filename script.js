@@ -22,8 +22,6 @@ const Gameboard = (function gameboard() {
     return {board};
 })();
 
-console.log(Gameboard.board)
-
 // Factory to create players
 
 function createPlayer (name, mark) {
@@ -32,8 +30,8 @@ function createPlayer (name, mark) {
     return{playerName, playerMark}
 };
 
-let playerOne = createPlayer('João', 'x');
-let playerTwo = createPlayer('Maria', 'o');
+let playerOne = createPlayer('', 'x');
+let playerTwo = createPlayer('', 'o');
 
 let currentPlayerMark = playerOne.playerMark;
 let currentPlayerName = playerOne.playerName;
@@ -61,13 +59,16 @@ function cellClicked() {
 }
 
 function restartGame() {
-
+    currentPlayerMark = playerOne.playerMark;
+    Gameboard.board = ['', '', '', '', '', '','', '', '']
+    statusText.textContent = `${currentPlayerName}'s turn`;
+    cells.forEach(cell => cell.textContent = '');
+    running = true;
 }
 
 function updateCell(cell, index) {
     Gameboard.board[index] = currentPlayerMark;
     cell.textContent = currentPlayerMark;
-    console.log(Gameboard.board)
 }
 
 function changePlayer() {
@@ -78,6 +79,32 @@ function changePlayer() {
 }
 
 function checkWinner() {
+    let roundWon = false;
+
+    for(let i = 0; i < winningCombinations.length; i++){
+        const condition = winningCombinations[i];
+        const cellA = Gameboard.board[condition[0]];
+        const cellB = Gameboard.board[condition[1]];
+        const cellC = Gameboard.board[condition[2]];
+
+        if(cellA == '' || cellB == '' || cellC == '') {
+            continue;
+        }
+        if(cellA == cellB & cellB == cellC) {
+            roundWon = true;
+            break;
+        }
+    }
+
+    if(roundWon) {
+        statusText.textContent = `${currentPlayerName} wins!`;
+        running = false;
+    }
+    else if(!Gameboard.board.includes('')) {
+        statusText.textContent = 'Draw';
+        running = false;
+    }
+    
 
 }
 
