@@ -1,6 +1,12 @@
 const cells = document.querySelectorAll('.cell');
 const statusText = document.querySelector('.gameStatus');
 const restartBtn = document.querySelector('.restartBtn');
+const startBtn = document.querySelector('button[type="submit"]')
+const playerOneInput = document.querySelector('#player1')
+const playerTwoInput = document.querySelector('#player2')
+const popwindow = document.querySelector('#popup-window')
+const one = document.querySelector('.one')
+const two = document.querySelector('.two')
 
 // Check winner
 
@@ -30,14 +36,23 @@ function createPlayer (name, mark) {
     return{playerName, playerMark}
 };
 
-let playerOne = createPlayer('', 'x');
-let playerTwo = createPlayer('', 'o');
+let playerOne = createPlayer('', 'x')
+let playerTwo = createPlayer('', 'o')
 
-let currentPlayerMark = playerOne.playerMark;
-let currentPlayerName = playerOne.playerName;
+
+startBtn.addEventListener('click', function(event) {
+    event.preventDefault();
+    playerOne = createPlayer(playerOneInput.value, 'x')
+    playerTwo = createPlayer(playerTwoInput.value, 'o')
+    popwindow.style.display = 'none'
+    currentPlayerMark = playerOne.playerMark;
+    currentPlayerName = playerOne.playerName;
+    one.textContent += playerOneInput.value
+    two.textContent += playerTwoInput.value
+    initializeGame();
+})
+
 let running = false;
-
-initializeGame();
 
 function initializeGame() {
     cells.forEach(cell => cell.addEventListener('click', cellClicked))
@@ -64,6 +79,10 @@ function restartGame() {
     statusText.textContent = `${currentPlayerName}'s turn`;
     cells.forEach(cell => cell.textContent = '');
     running = true;
+    document.querySelector("#popup-window").style.display = "block";
+    one.textContent = 'Player 1: '
+    two.textContent = 'Player 2: '
+
 }
 
 function updateCell(cell, index) {
@@ -97,6 +116,7 @@ function checkWinner() {
     }
 
     if(roundWon) {
+        changePlayer()
         statusText.textContent = `${currentPlayerName} wins!`;
         running = false;
     }
